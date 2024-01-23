@@ -1,10 +1,12 @@
 <script>
 /* IMPORTER LES COMPOSANTS ICI */
-import ProductsTable from "./components/ProductsTable.vue"
+import ProductsTable from "./components/products/ProductsTable.vue"
+import MainLayout from "./components/layout/MainLayout.vue"
 
 export default {
   name: "App",
   components: {
+    MainLayout,
     ProductsTable
   },
   /* Utilisation d'un hook du cycle de vie du composant */
@@ -46,7 +48,9 @@ export default {
 </script>
 
 <template>
-  <section class="d-flex wrap">
+  <MainLayout>
+    <template #header>
+      <section class="d-flex wrap">
     <h1 class="w-f">Mon Product Store</h1>
     <section class="col-6">
       <h2 class="w-f">Product Form</h2>
@@ -82,7 +86,13 @@ export default {
       class="col-6"
       :products="products"  
     />
-  </section>
+      </section>
+
+    </template>
+    <!-- Injection dans le main layout -->
+    
+  </MainLayout>
+  
   <!-- Monter les composants ici -->
 </template>
 
