@@ -1,6 +1,6 @@
 <script>
 export default {
-    name: 'CompoOpet',
+    name: 'CompoOpt',
     data() {
         return {
             count: 2
