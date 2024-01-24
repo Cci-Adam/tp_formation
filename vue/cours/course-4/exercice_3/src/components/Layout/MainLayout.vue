@@ -10,7 +10,7 @@
         <!-- - injecter dans le slot Header -->
     <div class="container">
         <header
-            
+            v-if="$slots.header"
             class="p-3 mb-3 border-bottom"
         >
             <slot name="header"></slot>
@@ -18,7 +18,7 @@
         <main>
             <slot></slot>
         </main>
-        <footer>
+        <footer v-if="$slots.footer">
             <slot
                 
                 name="footer"

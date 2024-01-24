@@ -2,7 +2,7 @@
 
 ** redéfinir les slots **
 - nommé les slots
-- rendu consitionnel de slots / expliquer
+- rendu conditionnel de slots / expliquer
 - injecter dans le slot Header
 
 ** Remettre en place la boucle v-for et expliquer **

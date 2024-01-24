@@ -20,6 +20,7 @@ export default {
   },
   data() {
     return {
+      showUserNavItem: false,
       userNavItemsArray : [
         {
           name: "Settings",
@@ -88,6 +89,9 @@ export default {
         price: this.price,
         vta: this.vta
       })
+    },
+    toggleLogin() {
+       return this.showUserNavItem = !this.showUserNavItem
     }
   }
 }
@@ -98,23 +102,27 @@ export default {
   <main-layout>
     <!-- redéfinir les slots  -->
       <!-- - DEBUT injecter dans le slot Header -->
+      <template #header>
       <main-nav
         :navItems="navItemsArray"
         :userNavItems="userNavItemsArray"
-        :showUserNav="false"
+        :showUserNav="showUserNavItem"
       />
+      <button @click="toggleLogin">LOGIN MA GUEULE</button>
 
       <!-- Ajouter un bouton login qui toggle/bascule la valeur de showUserNav -->
       <!-- un bouton -->
       <!-- l'event click -->
       <!-- une methode pour modifier la valeur -->
-   
+      </template>
     <!-- - FIN injecter dans le slot Header -->
     
     <!-- Injecter ici les données dans le slot default 
     du composant main-layout -->
     <!-- Injection dans le Slot default -->
-    <section class="d-flex wrap">
+    <template #default>
+    <section v-if="showUserNavItem"
+    class="d-flex wrap">
       <section class="col-6">
         <h2 class="w-f">Product Form</h2>
         <form @submit.prevent="submitForm">
@@ -168,9 +176,12 @@ export default {
         :products="products"  
       />
     </section>
-
+  </template>
+    <template #footer>
     <!-- Injection dans le slot footer -->
     <!-- <template #footer></template> -->
+    </template>
+    
     
   </main-layout>
 </template>
