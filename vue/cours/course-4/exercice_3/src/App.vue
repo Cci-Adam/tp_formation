@@ -177,10 +177,6 @@ export default {
       />
     </section>
   </template>
-    <template #footer>
-    <!-- Injection dans le slot footer -->
-    <!-- <template #footer></template> -->
-    </template>
     
     
   </main-layout>

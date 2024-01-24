@@ -26,3 +26,15 @@
         </footer>
     </div>
 </template>
+
+<style scoped>
+.container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+header,main,footer {
+    width: 100%;
+    min-height: 4rem;
+}
+</style>
