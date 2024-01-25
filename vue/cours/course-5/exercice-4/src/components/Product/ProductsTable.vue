@@ -28,11 +28,10 @@ export default {
     },
     methods: {
         emitDeleteProduct(product) {
-            /* 
-            ici vous emettrez l'événement et le payload
-            qui permettra au composant parent de supprimer
-            le produit de la liste
-            */
+            this.$emit('deleteProduct', product)
+        },
+        emitEditProduct(product) {
+            this.$emit('editProduct', product)
         }
     },
     computed: {
@@ -86,10 +85,13 @@ export default {
                     <!-- Appel à une fonction computed -->
                     <td>{{ vtaCalculation(item.price, item.vta) }} €</td>
                     <td>
-                        <button 
+                         <button @click="emitEditProduct(item)"
                             class="btn btn-primary"
                         >
                             Éditer
+                        </button>
+                        <button @click="emitDeleteProduct(item)" class="btn btn-danger">
+                            Supprimer
                         </button>
                         <!-- Ajouter un bouton de suppression d'un produit -->
                         <!-- au clic, appel de la fonction emitDeleteProduct(product) -->

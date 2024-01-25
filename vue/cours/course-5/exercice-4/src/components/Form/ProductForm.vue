@@ -20,20 +20,38 @@
                 category: "sweet"
             }
         },
+        props : { 
+          edit : false,
+          produit: {
+            type: Object,
+            default: {
+            name: "biscuit",
+            description: "Oh qu'ils sont bon !!",
+            price: 99,
+            vta: 20,
+            category: "Confiserie"
+            }
+        },
+        },
         methods: {
             submitForm() {
-                const product = {
-                  id: Math.floor(Math.random() * Date.now()),
-                  name: this.name,
-                  description: this.description,
-                  price: this.price,
-                  vta: this.vta,
-                  category: this.category
+              let product = {}
+              
+              
+                  product = {
+                  id: this.produit.id,
+                  name: this.produit.name,
+                  description: this.produit.description,
+                  price: this.produit.price,
+                  vta: this.produit.vta,
+                  category: this.produit.category
                 }
+              
                 console.log(product)
                 this.$emit("addProduct", product)
                 this.$parent.$emit("addProduct", product)
                 this.$root.$emit("addProduct", product)
+                console.log(this.produit)
             }
         }
     }
@@ -42,6 +60,7 @@
 <template>
     <section>
         <h2 class="w-f">Product Form</h2>
+        <p v-if="edit">Modifier</p>
         <form @submit.prevent="submitForm">
           <div class="mb-3">
             <label for="name" class="form-label">Nom</label>
@@ -51,7 +70,7 @@
                 id="name"
                 name="name"
                 aria-describedby="name-help"
-                v-model="name"
+                v-model="this.produit.name"
                 required
             >
             <div id="name-help" class="form-text">productorUn Nom!</div>
@@ -65,7 +84,7 @@
                 name="price"
                 min="1"
                 aria-describedby="price-help"
-                v-model="price"
+                v-model="this.produit.price"
                 required
             >
             <div id="price-help" class="form-text">Un Prix</div>
@@ -78,7 +97,7 @@
                 id="vta"
                 name="vta"
                 aria-describedby="vta-help"
-                v-model="vta"
+                v-model="this.produit.vta"
                 required
             >
             <div id="vta-help" class="form-text">La TVA</div>
@@ -88,13 +107,13 @@
             <select 
                 id="category"
                 class="form-select" 
-                v-model="category"
+                v-model="this.produit.category"
                 required
             >
-              <option value="meat">Viande</option>
-              <option value="vegetable">Légume</option>
-              <option value="drink">Boisson</option>
-              <option value="sweet">Confiserie</option>
+              <option value="Viane">Viande</option>
+              <option value="Légume">Légume</option>
+              <option value="Boisson">Boisson</option>
+              <option value="Confiserie">Confiserie</option>
             </select>
           </div>
           <div class="mb-3">
@@ -104,7 +123,7 @@
                 id="description" 
                 name="description"
                 rows="3"
-                v-model="description"
+                v-model="this.produit.description"
             >
             </textarea>
           </div>

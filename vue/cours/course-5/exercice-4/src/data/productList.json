@@ -15,5 +15,29 @@
         "description": "Y'a bon !",
         "price": 10,
         "vta": 20
+    },
+    {
+        "id": 33,
+        "name": "Femme",
+        "category": "Viande",
+        "description": "Y'a mieux !",
+        "price": 50,
+        "vta": 30
+    },
+    {
+        "id": 42,
+        "name": "Adam",
+        "category": "HOMME !!!",
+        "description": "Y'a pas mieux !",
+        "price": 999999999999999,
+        "vta": 9999999999999
+    },
+    {
+        "id": 51,
+        "name": "Prince Pocket",
+        "category": "Confiserie",
+        "description": "Utile pour programmer",
+        "price": 5,
+        "vta": 10
     }
 ]
