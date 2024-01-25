@@ -3,9 +3,8 @@ import MainLayout from './components/Layout/MainLayout.vue'
 import MainNav from './components/Layout/MainNav.vue'
 import ProductForm from "./components/Form/ProductForm.vue"
 import ProductsTable from "./components/Product/ProductsTable.vue"
-import products from  "./data/productList.json"
 /* Importation des données depuis un fichier json - La conversion est automatique */
-
+import products from "./data/productList.json"
 
 export default {
   name: 'App',
@@ -17,9 +16,6 @@ export default {
   },
   data() {
     return {
-      edit : false,
-      idEdit : 0,
-      produit : {},
       userNavItemsArray : [
         {
           name: "Settings",
@@ -62,39 +58,35 @@ export default {
         }
       ],
       /* On lie les données importées depuis le fichier JSON */
-      products: products
+      products: products,
+      editMode: false,
+      productToEdit: null
     }
   },
   methods: {
     /* payload représente les données envoyées par l'événement */
     addProduct(payload) {
-      if (this.edit) {
-        this.products = this.products.map(element => {
-          if (element.id == this.idEdit) {
-            console.log(payload)
-            return payload
-          }
-          else {
-            return element
-          }
-        })
-      }
-      else {
-        this.products.push(payload)
-      }
-      this.idEdit = -1;
-      this.edit = false;
-      return this.products
+      this.products.push(payload)
+    },
+    editProduct(product) {
+      this.productToEdit = product != null ? product : null
+      this.editMode = product != null ? true : false
+    },
+    updateProduct(product) {
+      this.resetEditionMode()
+      const index = this.products.findIndex(el => {
+          return el.id === product.id
+      })
+      this.products[index] = product
+      console.log("update", product)
     },
     deleteProduct(product) {
       /* Ici on va parcourir le tableau products et supprimer le produit transmis */
-      this.products = this.products.filter(element => element.id != product.id)
-
+      this.products = this.products.filter(el => el.id != product.id)
     },
-    editProduct(product) {
-      this.idEdit = product.id
-      this.edit = !this.edit
-      this.produit = product
+    resetEditionMode() {
+      this.productToEdit = null
+      this.editMode = false 
     }
   }
 }
@@ -113,16 +105,12 @@ export default {
 
     <section class="d-flex wrap">
       <!-- insérer un écouter d'évènement personnalisé qui appel la focntion addProduct -->
-      <product-form v-if="!edit"
+      <product-form
         @addProduct="addProduct"
+        @updateProduct="updateProduct"
         class="col-6"
-        :edit="edit"
-      />
-      <product-form v-if="edit"
-        @addProduct="addProduct"
-        class="col-6"
-        :edit="edit"
-        :produit="produit"
+        :editMode="editMode"
+        :productToEdit="productToEdit"
       />
       <!-- 
         Ici, nous allons écouter un événement qui stipule
@@ -130,10 +118,10 @@ export default {
         la fonction de suppression deleteProduct
       -->
       <products-table
-        @deleteProduct="deleteProduct"
-        @editProduct="editProduct"
         class="col-6"
-        :products="products"  
+        :products="products"
+        @editProduct="editProduct"
+        @deleteProduct="deleteProduct"
       />
     </section>
   

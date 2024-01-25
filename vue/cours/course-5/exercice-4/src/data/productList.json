@@ -19,7 +19,7 @@
     {
         "id": 33,
         "name": "Femme",
-        "category": "Viande",
+        "category": "Objet",
         "description": "Y'a mieux !",
         "price": 50,
         "vta": 30
@@ -29,8 +29,8 @@
         "name": "Adam",
         "category": "HOMME !!!",
         "description": "Y'a pas mieux !",
-        "price": 999999999999999,
-        "vta": 9999999999999
+        "price": 1e310,
+        "vta": 1e310
     },
     {
         "id": 51,

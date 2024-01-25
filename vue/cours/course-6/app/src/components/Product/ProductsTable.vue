@@ -4,10 +4,9 @@ Ajouter un événement deleteProduct
 Transmettre les données au composant parent 
 */
 
-
 export default {
     name: 'ProductsTable',
-    emits: ['deleteProduct', 'editProduct'],
+    emits: ["editProduct", "deleteProduct"],
     data() {
         return {
             nothing: null
@@ -28,11 +27,11 @@ export default {
         }
     },
     methods: {
-        emitDeleteProduct(product) {
-            this.$emit('deleteProduct', product)
-        },
         emitEditProduct(product) {
-            this.$emit('editProduct', product)
+            this.$emit("editProduct", product)
+        },
+        emitDeleteProduct(product) {
+            this.$emit("deleteProduct", product)
         }
     },
     computed: {
@@ -71,7 +70,7 @@ export default {
             </thead>
             <tbody class="table-group-divider">
                 <tr 
-                    v-for="(item, index) in products"
+                    v-for="item in products"
                     :key="item.id"
                 >
                     <td>{{ item.name }}</td>
@@ -86,16 +85,20 @@ export default {
                     <!-- Appel à une fonction computed -->
                     <td>{{ vtaCalculation(item.price, item.vta) }} €</td>
                     <td>
-                         <button @click="emitEditProduct(item)"
+                        <button 
                             class="btn btn-primary"
+                            @click="emitEditProduct(item)"
                         >
                             Éditer
                         </button>
-                        <button @click="emitDeleteProduct(item)" class="btn btn-danger">
-                            Supprimer
-                        </button>
                         <!-- Ajouter un bouton de suppression d'un produit -->
                         <!-- au clic, appel de la fonction emitDeleteProduct(product) -->
+                        <button 
+                            class="btn btn-danger"
+                            @click="emitDeleteProduct(item)"
+                        >
+                            Supprimer
+                        </button>
                     </td>
                 </tr>
             </tbody>

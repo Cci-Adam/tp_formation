@@ -7,18 +7,6 @@
             console.log(this)
         },
         updated() {
-            console.log(this.name)
-            console.log(this.description)
-            console.log(this.price)
-        },
-        data() {
-            return {
-                name: "biscuit",
-                description: "Oh qu'ils sont bon !!",
-                price: 99,
-                vta: 20,
-                category: "sweet"
-            }
         },
         props : { 
           edit : false,
@@ -35,17 +23,22 @@
         },
         methods: {
             submitForm() {
-              let product = {}
+              let ID = 0;
+              if (!this.edit) {
+                ID = Math.floor(Math.random() * Date.now())
+              }
+              else {
+                ID = this.produit.id
+              }
               
-              
-                  product = {
-                  id: this.produit.id,
-                  name: this.produit.name,
-                  description: this.produit.description,
-                  price: this.produit.price,
-                  vta: this.produit.vta,
-                  category: this.produit.category
-                }
+              const product = {
+              id: ID,
+              name: this.produit.name,
+              description: this.produit.description,
+              price: this.produit.price,
+              vta: this.produit.vta,
+              category: this.produit.category
+              }
               
                 console.log(product)
                 this.$emit("addProduct", product)
@@ -110,7 +103,7 @@
                 v-model="this.produit.category"
                 required
             >
-              <option value="Viane">Viande</option>
+              <option value="Viande">Viande</option>
               <option value="Légume">Légume</option>
               <option value="Boisson">Boisson</option>
               <option value="Confiserie">Confiserie</option>
