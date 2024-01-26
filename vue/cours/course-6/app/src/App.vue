@@ -64,16 +64,26 @@ export default {
     }
   },
   methods: {
-    /* payload représente les données envoyées par l'événement */
     editProduct(product) {
       this.productToEdit = product != null ? product : null
       this.editMode = product != null ? true : false
     },
-    
+    updateProduct(product) {
+      this.resetEditionMode()
+      const index = this.products.findIndex(el => {
+          return el.id === product.id
+      })
+      this.products[index] = product
+      console.log("update", product)
+    },
     deleteProduct(product) {
       /* Ici on va parcourir le tableau products et supprimer le produit transmis */
       this.products = this.products.filter(el => el.id != product.id)
     },
+    resetEditionMode() {
+      this.productToEdit = null
+      this.editMode = false 
+    }
   }
 }
 </script>
@@ -96,11 +106,6 @@ export default {
         :editMode="editMode"
         :productToEdit="productToEdit"
       />
-      <!-- 
-        Ici, nous allons écouter un événement qui stipule
-        de supprimer un produit de la liste et appeler
-        la fonction de suppression deleteProduct
-      -->
       <products-table
         class="col-6"
         :products="products"
