@@ -1,7 +1,10 @@
 <script>
+import { mapState, mapActions } from 'pinia'
+import { useProductsStore } from '../../stores/products.js'
+
     export default {
         name: 'ProductForm',
-        emits: ['addProduct', "updateProduct"],
+        emits: ["updateProduct"],
         /* Utilisation d'un hook du cycle de vie du composant */
         mounted() {
             console.log(this)
@@ -53,7 +56,8 @@
                   vta: this.vta,
                   category: this.category
                 }
-                this.$emit("updateProduct", product)
+                //this.$emit("updateProduct", product)
+                this.updateProduct(product)
                 this.confirmEditMode = false
                 this.currentProduct = null
               } else {
@@ -65,9 +69,13 @@
                   vta: this.vta,
                   category: this.category
                 }
-                this.$emit("addProduct", product)
+                this.addProduct(product)
               }
-            }
+            },
+            ...mapActions(useProductsStore, {
+              updateProduct: 'updateProduct',
+              addProduct: 'addProduct',
+            })
         }
     }
 </script>
