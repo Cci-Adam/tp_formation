@@ -4,8 +4,8 @@ import { defineStore } from 'pinia'
 /* @ est un raccourcis pour partir du dossier src */
 import products from "@/data/productList.json"
 
-const STORE_NAME = "products"
-const STORE_LOCALE_STORAGE_KEY = "products"
+const STORE_NAME = 'products'
+const STORE_LOCALE_STORAGE_KEY = 'products'
 
 const getDefaultState = () => products
 const getCurrentState = () => {
@@ -13,7 +13,7 @@ const getCurrentState = () => {
   return localeData ? JSON.parse(localeData) : getDefaultState()
 }
 
-export const useProductsStore = defineStore('products', {
+export const useProductsStore = defineStore(STORE_NAME, {
     state: () => {
       return {
         products: getCurrentState(),

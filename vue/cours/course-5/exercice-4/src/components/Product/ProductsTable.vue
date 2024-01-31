@@ -91,7 +91,7 @@ export default {
                         >
                             Éditer
                         </button>
-                        <button @click="emitDeleteProduct(item)" class="btn btn-danger">
+                        <button @click="deleteProduct(item.id)" class="btn btn-danger">
                             Supprimer
                         </button>
                         <!-- Ajouter un bouton de suppression d'un produit -->
